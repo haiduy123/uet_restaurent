@@ -1,0 +1,106 @@
+#dangNhap_btn, #hoanThanh_btn {
+    -fx-background-color: #11803f;
+}
+
+#dangKy_btn, #quayLai_btn {
+    -fx-background-color: #d2721b;
+}
+
+#check_btn, #logout_btn {
+    -fx-background-color: transparent;
+}
+
+#dangKy_btn:hover, #dangNhap_btn:hover, #hoanThanh_btn:hover, #quayLai_btn:hover,
+#thanhToan_btn:hover, #nhanVien_btn:hover, #thucDon_btn:hover, #hoaDon_btn:hover, #check_btn:hover, #logout_btn:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+}
+
+#maDangNhap {
+    /*-fx-background-color: transparent;*/
+    -fx-border-radius: 10%;
+}
+
+#container {
+    -fx-background-color: #1d243d;
+}
+#thanhToan_btn {
+    -fx-background-color: #ff595e;
+}
+
+/*#thanhToan_btn:hover {*/
+/*    -fx-background-color: #ed6f03;*/
+/*}*/
+
+#nhanVien_btn {
+    -fx-background-color: #00a441;
+}
+
+/*#nhanVien_btn:hover {*/
+/*    -fx-background-color: #dfc590;*/
+/*}*/
+
+#thucDon_btn {
+    -fx-background-color: #ffcc00;
+}
+
+/*#thucDon_btn:hover {*/
+/*    -fx-background-color: #a5cbd9;*/
+/*}*/
+
+#hoaDon_btn {
+    -fx-background-color: #139cd2;
+}
+
+/*#hoaDon_btn:hover {*/
+/*    -fx-background-color: #d2d7ea;*/
+/*}*/
+
+#order_container {
+    -fx-background-color: #c8e4ef;
+}
+
+#ban1_btn, #ban2_btn, #ban3_btn, #ban4_btn, #ban5_btn, #ban6_btn, #ban7_btn, #ban8_btn {
+    -fx-background-color: #86c2da;
+}
+
+.list-cell{
+    -fx-font-size: 16;
+    -fx-font-weight: 500;
+    -fx-padding: 5;
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+.list-cell:even, .list-cell:odd{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    /*-fx-text-fill: bold;*/
+}
+.list-cell:even{
+    -fx-background-color: #273568;
+    -fx-text-fill: white;
+}
+.list-cell:odd {
+    -fx-background-color: #86c2da;
+    -fx-text-fill: #3333cc 0%;
+}
+.list-cell:filled:hover {
+    -fx-background-color: #c8a765;
+    -fx-text-fill: white;
+}
+
+#mon1_container {
+    -fx-hgap: 20px;
+    -fx-padding: 40px;
+
+    -fx-background-color: #2969c0;
+    -fx-border-color: white;
+    -fx-border-radius: 50px;
+    -fx-border-width: 5px;
+}
+
+#mon1_btn {
+    -fx-background-color: transparent;
+}
