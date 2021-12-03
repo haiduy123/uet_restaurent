@@ -1,6 +1,7 @@
 module com.example.demo1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.demo1 to javafx.fxml;
@@ -17,4 +18,12 @@ module com.example.demo1 {
 
     opens start to javafx.fxml;
     exports start;
+
+    opens Table to javafx.fxml;
+    exports Table;
+
+    opens test to javafx.fxml;
+    exports test;
+
+    opens Food to javafx.base;
 }

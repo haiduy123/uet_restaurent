@@ -45,7 +45,7 @@ public class Controller {
 
     @FXML
     void thanhToan_btn(ActionEvent event) throws IOException {
-        URL url = new File("src/main/resources/Order.fxml").toURI().toURL();
+        URL url = new File("src/main/resources/com/example/demo1/Table.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
         root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));

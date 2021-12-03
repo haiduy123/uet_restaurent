@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Order.Controller.table_list;
+import static Table.checkTable.table_list;
 
 public class Controller {
 
@@ -95,8 +95,6 @@ public class Controller {
         for (Integer i : list) {
             bill_sum += i;
         }
-
-//        String code = maBan.getText();
 
         for (ban table : table_list) {
             if (table.getMaBan().equals(code)) {

@@ -1,4 +1,4 @@
-package Order;
+package Table;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +12,14 @@ import java.net.URL;
 
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         //tải lên giao diên chính
-        URL url = new File("src/main/resources/com/example/demo1/menu_food.fxml").toURI().toURL();
+        URL url = new File("src/main/resources/com/example/demo1/Table.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
 
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
@@ -23,11 +27,5 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
