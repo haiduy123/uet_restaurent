@@ -8,22 +8,21 @@ import Food.*;
 import login.mainAccount;
 
 public class bill {
-    public int billId;
-    public List<food> selectedFoods;
-    public List<String> foodNotes;
+    private int billId;
+    private List<food> selectedFoods = new ArrayList<>();
+    private List<String> foodNotes;
     public int totalMoney;
-    public LocalDateTime timeIn;
-    public LocalDateTime paymentTime;
-    public int employeeId;
+    private LocalDateTime timeIn;
+    private LocalDateTime paymentTime;
+    private int employeeId;
+
+    public int newBillId = 0;
+
 
     public bill() {
-        selectedFoods = new ArrayList<>();
-        foodNotes = new ArrayList<>();
-        totalMoney = 0;
-        this.timeIn = LocalDateTime.now();
-        this.paymentTime = null;
         employeeId = mainAccount.getUserID();
     }
+
     public bill(int bID, List<food> selectedFoods, List<String> foodNotes
             , int totalMoney, LocalDateTime timeIn, LocalDateTime paymentTime, int employeeId) {
         this.billId = bID;
@@ -89,5 +88,17 @@ public class bill {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+
+    //tạo một hóa đơn mới
+    public void createNewBill() {
+        bill bill = new bill();
+        ++newBillId;
+        bill.setBillId(newBillId);
+    }
+
+    // thêm 1 sản phẩm mới vào bill
+    public void addNewFood(food food) {
+        this.selectedFoods.add(food);
     }
 }

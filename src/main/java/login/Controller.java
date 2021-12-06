@@ -1,6 +1,7 @@
 package login;
 
 import Alert.Alerts;
+import SQL.SQL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 public class Controller {
     @FXML
@@ -32,11 +34,16 @@ public class Controller {
     @FXML
     private PasswordField matKhau;
 
+    SQL sqlConnect = new SQL();
+    public Controller() throws SQLException {
+    }
+
     @FXML
-    void dangNhap_btn(ActionEvent event) throws IOException {
-        String id = maDangNhap.getText();
+    void dangNhap_btn(ActionEvent event) throws IOException, SQLException {
+        sqlConnect.connect();
+        int id = Integer.parseInt(maDangNhap.getText());
         String pass = matKhau.getText();
-        if (id == "" || pass == "" ) {
+        if (!SQL.checkID(id,pass)) {
             Alerts.showAlertWarning("Đăng nhập", "Đăng nhập không thành công");
         } else {
             URL url = new File("src/main/resources/com/example/demo1/start.fxml").toURI().toURL();

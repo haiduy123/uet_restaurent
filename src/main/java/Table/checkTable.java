@@ -1,5 +1,7 @@
 package Table;
 
+import Bill.bill;
+import SQL.SQL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,41 +9,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import thucdon.ban;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
+import static Bill.billManagement.billList;
 
 public class checkTable {
 
     @FXML
-    private Button ban1_btn;
-
-    @FXML
-    private Button ban2_btn;
-
-    @FXML
-    private Button ban3_btn;
-
-    @FXML
-    private Button ban4_btn;
-
-    @FXML
-    private Button ban5_btn;
-
-    @FXML
-    private Button ban6_btn;
-
-    @FXML
-    private Button ban7_btn;
-
-    @FXML
-    private Button ban8_btn;
+    private Button ban1_btn, ban2_btn, ban3_btn, ban4_btn, ban5_btn, ban6_btn, ban7_btn, ban8_btn ;
 
     @FXML
     private Button check_btn;
@@ -52,13 +38,13 @@ public class checkTable {
     @FXML
     private ListView<String> test;
 
-    public static ArrayList<ban> table_list = new ArrayList<>();
+    public static ArrayList<table> tableList = new ArrayList<>();
 
-    private ArrayList<Button> button_list = new ArrayList<>();
-    URL url = new File("src/main/resources/com/example/demo1/thucdon.fxml").toURI().toURL();
+    private ArrayList<Button> buttonList = new ArrayList<>();
+    URL url = new File("src/main/resources/com/example/demo1/menu_food.fxml").toURI().toURL();
     File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
 
-    public checkTable() throws MalformedURLException {
+    public checkTable() throws MalformedURLException, SQLException {
     }
 
     @FXML
@@ -69,80 +55,107 @@ public class checkTable {
         window.setScene(new Scene(root));
     }
 
+    void makeBill(Button btn) {
+        for(table table : tableList) {
+            if(table.getTableId() == Integer.parseInt(btn.getText()) && table.getCurPrice() == 0) {
+                bill bill = new bill();
+                bill.setBillId(SQL.getNewBillIdSQL() + 1);
+                billList.add(bill);
+                bill.setTimeIn(LocalDateTime.now());
+                Order.Controller.codeBill = bill.getBillId();
+                table.setBillId(bill.getBillId());
+            }
+        }
+    }
     @FXML
     void ban1_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban1_btn);
-        thucdon.Controller.code = ban1_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban1_btn.getText());
+
+        // tạo ra 1 bill mới
+        makeBill(ban1_btn);
     }
 
     @FXML
     void ban2_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban2_btn);
-        thucdon.Controller.code = ban2_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban2_btn.getText());
+        makeBill(ban2_btn);
+
     }
 
     @FXML
     void ban3_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban3_btn);
-        thucdon.Controller.code = ban3_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban3_btn.getText());
+        makeBill(ban3_btn);
+
     }
 
     @FXML
     void ban4_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban4_btn);
-        thucdon.Controller.code = ban4_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban4_btn.getText());
+        makeBill(ban4_btn);
+
     }
 
     @FXML
     void ban5_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban5_btn);
-        thucdon.Controller.code = ban5_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban5_btn.getText());
+        makeBill(ban5_btn);
+
     }
 
     @FXML
     void ban6_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban6_btn);
-        thucdon.Controller.code = ban6_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban6_btn.getText());
+        makeBill(ban6_btn);
+
     }
 
     @FXML
     void ban7_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban7_btn);
-        thucdon.Controller.code = ban7_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban7_btn.getText());
+        makeBill(ban7_btn);
+
     }
 
     @FXML
     void ban8_btn(ActionEvent event) throws IOException {
         pickthrows(url, f, ban8_btn);
-        thucdon.Controller.code = ban8_btn.getText();
+        Order.Controller.code = Integer.parseInt(ban8_btn.getText());
+        makeBill(ban8_btn);
     }
 
 
     @FXML
     void check_btn(ActionEvent event) {
-        int dem = 0;
         add_button();
         add_table();
-        for(ban table : table_list) {
-            ban tmp = table;
-            if (table.getBill() == 0) {
-                for(Button btn : button_list) {
-                    if (btn.getText().equals(tmp.getMaBan())) {
+        for(table table : tableList) {
+            table tmp = table;
+            if (table.getCurPrice() == 0) {
+                for(Button btn : buttonList) {
+                    if (Integer.parseInt(btn.getText()) == tmp.getTableId()) {
                         btn.setStyle("-fx-background-color: green;");
-                        dem++;
                     }
                 }
             }
             else {
-                for(Button btn : button_list) {
-                    if (btn.getText().equals(tmp.getMaBan())) {
+                for(Button btn : buttonList) {
+                    if (Integer.parseInt(btn.getText()) == tmp.getTableId()) {
                         btn.setStyle("-fx-background-color: red;");
                     }
                 }
             }
         }
-        for (int i = 0; i < table_list.size(); i++) {
-            String tmp = "Bàn" + table_list.get(i).getMaBan() + ": " + table_list.get(i).getBill() + "\n";
+
+        for (table table : tableList) {
+            String tmp = "Bàn" + table.getTableId() + ": " + table.getCurPrice() + "\n";
             test.getItems().add(tmp);
         };
         check_btn.setVisible(false);
@@ -161,60 +174,61 @@ public class checkTable {
 
     void check_button(Button btn) {
         int dem = 0;
-        for(Button tmp : button_list) {
+        for(Button tmp : buttonList) {
             if(tmp.getText().equals(btn.getText())) {
                 dem++;
             }
         }
         if(dem == 0) {
-            button_list.add(btn);
+            buttonList.add(btn);
         }
     }
 
-    void check_table(ban tmp) {
+    void check_table(table tmp) {
         int dem = 0;
-        for(ban table : table_list) {
-            if(table.getMaBan().equals(tmp.getMaBan())) {
+        for(table table : tableList) {
+            if(table.getTableId() == tmp.getTableId()) {
                 dem++;
             }
         }
         if(dem == 0) {
-            table_list.add(tmp);
+            tableList.add(tmp);
         }
     }
 
     public void add_table() {
-        ban table1 = new ban();
-        table1.setMaBan(ban1_btn.getText());
+        table table1 = new table();
+        table1.setTableId(Integer.parseInt(ban1_btn.getText()));
         check_table(table1);
 
-        ban table2 = new ban();
-        table2.setMaBan(ban2_btn.getText());
+        table table2 = new table();
+        table2.setTableId(Integer.parseInt(ban2_btn.getText()));
         check_table(table2);
 
-        ban table3 = new ban();
-        table3.setMaBan(ban3_btn.getText());
+        table table3 = new table();
+        table3.setTableId(Integer.parseInt(ban3_btn.getText()));
         check_table(table3);
 
-        ban table4 = new ban();
-        table4.setMaBan(ban4_btn.getText());
+        table table4 = new table();
+        table4.setTableId(Integer.parseInt(ban4_btn.getText()));
         check_table(table4);
 
-        ban table5 = new ban();
-        table5.setMaBan(ban5_btn.getText());
+        table table5 = new table();
+        table5.setTableId(Integer.parseInt(ban5_btn.getText()));
         check_table(table5);
 
-        ban table6 = new ban();
-        table6.setMaBan(ban6_btn.getText());
+        table table6 = new table();
+        table6.setTableId(Integer.parseInt(ban6_btn.getText()));
         check_table(table6);
 
-        ban table7 = new ban();
-        table7.setMaBan(ban7_btn.getText());
+        table table7 = new table();
+        table7.setTableId(Integer.parseInt(ban7_btn.getText()));
         check_table(table7);
 
-        ban table8 = new ban();
-        table8.setMaBan(ban8_btn.getText());
+        table table8 = new table();
+        table8.setTableId(Integer.parseInt(ban8_btn.getText()));
         check_table(table8);
+
     }
 }
 

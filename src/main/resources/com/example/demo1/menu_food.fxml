@@ -6,14 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="793.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Order.Controller">
+<AnchorPane prefHeight="774.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Order.Controller">
     <children>
-        <TableView fx:id="tableView" layoutX="6.0" layoutY="6.0" prefHeight="473.0" prefWidth="668.0">
+        <TableView fx:id="tableView" layoutX="36.0" layoutY="161.0" prefHeight="473.0" prefWidth="668.0">
             <columns>
                 <TableColumn fx:id="fID_Column" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="fName_Column" prefWidth="115.0" text="TÊN MÓN" />
-                <TableColumn fx:id="fPrice_Column" prefWidth="88.0" text="GIÁ" />
+                <TableColumn fx:id="fName_Column" prefWidth="168.0" text="TÊN MÓN" />
+                <TableColumn fx:id="fPrice_Column" prefWidth="87.0" text="GIÁ" />
+                <TableColumn fx:id="fQuantity_Column" prefWidth="89.0" text="SỐ LƯỢNG" />
+                <TableColumn fx:id="fButton_Column" prefWidth="89.0" text="ORDER" />
             </columns>
         </TableView>
+        <ListView fx:id="listView" layoutX="743.0" layoutY="53.0" prefHeight="250.0" prefWidth="250.0" />
+        <Label fx:id="billPrice" layoutX="846.0" layoutY="367.0" prefHeight="30.0" prefWidth="57.0" text="Label" />
+        <Button fx:id="quayLai_btn" layoutX="487.0" layoutY="718.0" mnemonicParsing="false" onAction="#quayLai_btn" text="Button" />
+        <Button fx:id="check_btn" layoutX="490.0" layoutY="66.0" mnemonicParsing="false" onAction="#check_btn" text="check" />
+        <Button fx:id="thanhToan_btn" layoutX="829.0" layoutY="463.0" mnemonicParsing="false" onAction="#thanhToan_btn" text="Thanh Toán" />
     </children>
 </AnchorPane>

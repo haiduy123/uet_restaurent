@@ -29,7 +29,7 @@ public class SQL {
 
     public SQL() throws SQLException {
         connect();
-        mainAccount.logIn();
+//        mainAccount.logIn();
         getAllEmployees(allEmployees());
         getAllFoodsSQL(allFoods());
         //getWords(getAllWord());
@@ -47,6 +47,69 @@ public class SQL {
             e.printStackTrace();
         }
     }
+
+    public static int getNewBillIdSQL() {
+        ResultSet rs = null;
+        String sqlCommand = "SELECT * FROM " + tableBill + " ORDER BY bID DESC LIMIT 1";
+        Statement st;
+        int id = 0;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+            rs.next();
+            billManagement.newBillId = rs.getInt(1);
+            id = rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("Select error");
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+//    public static void getNewFoodIdSQL() {
+//        ResultSet rs = null;
+//        String sqlCommand = "SELECT * FROM " + tableFood + " ORDER BY fID DESC LIMIT 1";
+//        Statement st;
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(sqlCommand);
+//            rs.next();
+//            foodManagement.newFoodId = rs.getInt(1);
+//        } catch (SQLException e) {
+//            System.out.println("Select error");
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public static void getNewTableIdSQL() {
+//        ResultSet rs = null;
+//        String sqlCommand = "SELECT * FROM " + tableDtable + " ORDER BY tId DESC LIMIT 1";
+//        Statement st;
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(sqlCommand);
+//            rs.next();
+//            tableManagement.newTableId = rs.getInt(1);
+//        } catch (SQLException e) {
+//            System.out.println("Select error");
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public static void geNewEmployeeIdSQL() {
+//        ResultSet rs = null;
+//        String sqlCommand = "SELECT * FROM " + tableEmployee + " ORDER BY eID DESC LIMIT 1";
+//        Statement st;
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(sqlCommand);
+//            rs.next();
+//            employeeManagement.newEmployeeId = rs.getInt(1);
+//        } catch (SQLException e) {
+//            System.out.println("Select error");
+//            e.printStackTrace();
+//        }
+//    }
 
     public ResultSet allEmployees() {
         ResultSet rs = null;
@@ -186,8 +249,8 @@ public class SQL {
         PreparedStatement pst = null;
         try {
             pst = connection.prepareStatement(sqlCommand);
-            pst.setInt(1, x.foodId);
-            pst.setInt(2, x.price);
+            pst.setInt(1, x.getFoodId());
+            pst.setInt(2, x.getPrice());
             //pst.setString(3, "none");
             pst.setInt(3, bID);
             if (pst.executeUpdate() > 0) {
@@ -207,13 +270,13 @@ public class SQL {
         PreparedStatement pst = null;
         try {
             pst = connection.prepareStatement(sqlCommand);
-            pst.setInt(1, nBi.billId);
-            pst.setInt(2, nBi.totalMoney);
+            pst.setInt(1, nBi.getBillId());
+            pst.setInt(2, nBi.getTotalMoney());
             pst.setInt(3, 0);
-            pst.setTimestamp(4, java.sql.Timestamp.valueOf(nBi.timeIn));
-            pst.setInt(5, nBi.employeeId);
+            pst.setTimestamp(4, java.sql.Timestamp.valueOf(nBi.getTimeIn()));
+            pst.setInt(5, nBi.getEmployeeId());
             if (pst.executeUpdate() > 0) {
-                System.out.println("update success :" + pst.executeUpdate());
+                System.out.println("update success :" + nBi.getBillId());
             } else {
                 System.out.println("update billdetails error");
             }
@@ -222,6 +285,8 @@ public class SQL {
         }
     }
 
+
+    // lúc thanh toán thì update thời gian thanh toán
     public static void payBill(int bID, LocalDateTime payTime) {
         ResultSet rs = null;
         String sqlCommand = "UPDATE " + tableBill + " SET timePayment = ?" + " WHERE bID = ? ";
@@ -243,7 +308,7 @@ public class SQL {
     public static void main(String[] args) throws SQLException {
         SQL myconnect = new SQL();
         billManagement bl = new billManagement();
-        bl.newBill();
+//        bl.newBill();
         myconnect.payBill(90, LocalDateTime.now());
 //        myconnect.printAllEmployees(myconnect.allEmployees());
 //        myconnect.addEmployee("Trần Thủy", "Nhân viên", 4635);

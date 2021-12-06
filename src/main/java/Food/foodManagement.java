@@ -26,7 +26,7 @@ public class foodManagement {
 
     public static void addFood(food f) {
         allFood.add(f);
-        Order.Controller.food_list.add(f);
+//        Order.Controller.food_list.add(f);
     }
 
     public boolean removeFood(food f) {

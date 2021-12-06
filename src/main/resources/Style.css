@@ -104,3 +104,53 @@
 #mon1_btn {
     -fx-background-color: transparent;
 }
+
+#tableView{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+}
+
+#tableView:focused{
+    -fx-background-color: transparent;
+}
+
+#tableView .column-header-background{
+    -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
+}
+
+#tableView .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+#tableView .column-header, #tableView .filler {
+    -fx-background-color: transparent;
+}
+
+#tableView .table-cell{
+    -fx-text-fill: white;
+}
+
+#tableView .table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+#tableView .table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+#tableView .table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+#tableView .column-header-background .filler {
+    -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
+}
+
+/*#fID_Column.c*/
