@@ -1,4 +1,4 @@
-package test;
+package Bill;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        URL url = new File("src/main/resources/com/example/demo1/test.fxml").toURI().toURL();
+        //tải lên giao diên chính
+        URL url = new File("src/main/resources/com/example/demo1/bill.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
 
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");

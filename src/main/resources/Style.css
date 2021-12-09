@@ -6,7 +6,7 @@
     -fx-background-color: #d2721b;
 }
 
-#check_btn, #logout_btn {
+#checkTable_btn, #logout_btn {
     -fx-background-color: transparent;
 }
 
@@ -57,8 +57,8 @@
 /*    -fx-background-color: #d2d7ea;*/
 /*}*/
 
-#order_container {
-    -fx-background-color: #c8e4ef;
+#table_container {
+    -fx-background-color: linear-gradient(to right top, #1e2837, #22374b, #21475e, #1b5771, #0a6983);
 }
 
 #ban1_btn, #ban2_btn, #ban3_btn, #ban4_btn, #ban5_btn, #ban6_btn, #ban7_btn, #ban8_btn {
@@ -79,16 +79,16 @@
     /*-fx-text-fill: bold;*/
 }
 .list-cell:even{
-    -fx-background-color: #273568;
+    -fx-background-color: #0A6983;
     -fx-text-fill: white;
 }
 .list-cell:odd {
-    -fx-background-color: #86c2da;
-    -fx-text-fill: #3333cc 0%;
+    -fx-background-color: #372E31;
+    -fx-text-fill: white;
 }
 .list-cell:filled:hover {
-    -fx-background-color: #c8a765;
-    -fx-text-fill: white;
+    -fx-background-color: #D1859E;
+    -fx-text-fill: black;
 }
 
 #mon1_container {
@@ -105,52 +105,67 @@
     -fx-background-color: transparent;
 }
 
-#tableView{
+#foodTableView {
     -fx-background-color: transparent;
     -fx-background-radius: 30;
 }
 
-#tableView:focused{
+#checkBill_btn {
+    -fx-background-color: green;
+}
+#order_container {
+    -fx-background-color: linear-gradient(to right bottom, #4c303b, #483b4b, #454654, #475058, #51585a);
+}
+#foodTableView:focused{
     -fx-background-color: transparent;
 }
 
-#tableView .column-header-background{
+#foodTableView .column-header-background{
     -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
 }
 
-#tableView .column-header-background .label{
+#foodTableView .column-header-background .label{
     -fx-background-color: transparent;
     -fx-text-fill: white;
 }
 
-#tableView .column-header, #tableView .filler {
+#foodTableView .column-header, #tableView .filler {
     -fx-background-color: transparent;
 }
 
-#tableView .table-cell{
+#foodTableView .table-cell{
     -fx-text-fill: white;
 }
 
-#tableView .table-row-cell{
+#foodTableView .table-row-cell{
     -fx-background-color: -fx-table-cell-border-color, #616161;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 
-#tableView .table-row-cell:odd{
+#foodTableView .table-row-cell:odd{
     -fx-background-color: -fx-table-cell-border-color, #424242;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 
-#tableView .table-row-cell:selected {
+#foodTableView .table-row-cell:selected {
     -fx-background-color: #005797;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
 
-#tableView .column-header-background .filler {
+#foodTableView .column-header-background .filler {
     -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
 }
+
+.centered-table-column{
+    -fx-alignment: center;
+}
+
+#employeeTableView .table-row-cell {
+    -fx-cell-size: 24px;
+}
+
 
 /*#fID_Column.c*/

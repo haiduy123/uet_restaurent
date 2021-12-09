@@ -5,7 +5,7 @@ import java.util.List;
 
 public class tableManagement {
     public static int newTableId = 0;
-    static List<table> tables = new ArrayList<>();
+    public static List<table> tables = new ArrayList<>();
 
     //Thêm bàn vào danh sách(gọi ở bên class SQL)
     public static void addTableToList(table tb){
@@ -35,9 +35,9 @@ public class tableManagement {
     }
 
     // thanh toán hóa đơn -> xóa hóa đơn của bàn
-    public static void clearTable(int tableId) {
-        tables.get(tableId -1).setBillId(0);
-        tables.get(tableId -1).setFoods(new ArrayList<>());
+    public static void clearTable(int tableId, List<table> list) {
+        list.get(tableId -1).setBillId(0);
+        list.get(tableId -1).setFoods(new ArrayList<>());
     }
 
     //tạo hóa đơn mới dựa theo số bàn

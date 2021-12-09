@@ -30,7 +30,7 @@ public class checkTable {
     private Button ban1_btn, ban2_btn, ban3_btn, ban4_btn, ban5_btn, ban6_btn, ban7_btn, ban8_btn ;
 
     @FXML
-    private Button check_btn;
+    private Button checkTable_btn;
 
     @FXML
     private Button logout_btn;
@@ -133,7 +133,7 @@ public class checkTable {
 
 
     @FXML
-    void check_btn(ActionEvent event) {
+    void checkTable_btn(ActionEvent event) {
         add_button();
         add_table();
         for(table table : tableList) {
@@ -158,7 +158,7 @@ public class checkTable {
             String tmp = "Bàn" + table.getTableId() + ": " + table.getCurPrice() + "\n";
             test.getItems().add(tmp);
         };
-        check_btn.setVisible(false);
+        checkTable_btn.setVisible(false);
     }
 
     void add_button() {
@@ -231,5 +231,3 @@ public class checkTable {
 
     }
 }
-
-//tạo 1 array stt chính là stt của bàn

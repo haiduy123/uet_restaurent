@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="billContainer" prefHeight="483.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bill.Controller">
+   <children>
+      <TableView fx:id="billTableView" layoutX="132.0" layoutY="107.0" prefHeight="270.0" prefWidth="495.0">
+        <columns>
+          <TableColumn fx:id="bID_Column" prefWidth="75.0" text="Bill ID" />
+          <TableColumn fx:id="totalMoney_Column" prefWidth="87.0" text="Total Money" />
+            <TableColumn fx:id="timeIn_Column" prefWidth="113.0" text="Time In" />
+            <TableColumn fx:id="timePayment_Column" prefWidth="124.0" text="Time PayMent" />
+            <TableColumn fx:id="emploteeId_Column" minWidth="4.0" prefWidth="95.0" text="Employee ID" />
+            <TableColumn fx:id="bId_Column1" prefWidth="75.0" text="Bill ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

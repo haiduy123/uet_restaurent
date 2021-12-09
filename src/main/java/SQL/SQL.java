@@ -2,12 +2,14 @@ package SQL;
 
 import java.sql.*;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
 import Bill.*;
 import Food.*;
+import Table.*;
 import employees.*;
 import login.mainAccount;
 
@@ -32,6 +34,7 @@ public class SQL {
 //        mainAccount.logIn();
         getAllEmployees(allEmployees());
         getAllFoodsSQL(allFoods());
+//        getAllBill(allBills());
         //getWords(getAllWord());
         //wordList();
     }
@@ -96,20 +99,22 @@ public class SQL {
 //        }
 //    }
 //
-//    public static void geNewEmployeeIdSQL() {
-//        ResultSet rs = null;
-//        String sqlCommand = "SELECT * FROM " + tableEmployee + " ORDER BY eID DESC LIMIT 1";
-//        Statement st;
-//        try {
-//            st = connection.createStatement();
-//            rs = st.executeQuery(sqlCommand);
-//            rs.next();
-//            employeeManagement.newEmployeeId = rs.getInt(1);
-//        } catch (SQLException e) {
-//            System.out.println("Select error");
-//            e.printStackTrace();
-//        }
-//    }
+    public static int getNewEmployeeIdSQL() {
+        int id = 0;
+        ResultSet rs = null;
+        String sqlCommand = "SELECT * FROM " + tableEmployee + " ORDER BY eID DESC LIMIT 1";
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+            rs.next();
+            id = rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("Select error");
+            e.printStackTrace();
+        }
+        return id;
+    }
 
     public ResultSet allEmployees() {
         ResultSet rs = null;
@@ -135,24 +140,27 @@ public class SQL {
                     , rs.getString(5)
                     , rs.getString(6)
                     , Instant.ofEpochMilli(rs.getDate(7).getTime()).atZone(ZoneId.systemDefault()).toLocalDate()));
+//                    , rs.getString(8);
         }
     }
 
     // thêm nhân viên
     public static void addEmployeeSQL(employee e) {
-        String sqlCommand = "insert into " + tableEmployee + " value( ?, ?, ?, ?, ?, ?, ?)";
+        String sqlCommand = "insert into " + tableEmployee + " value( ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = null;
         try {
-            pst.setInt(1, e.employeeId);
-            pst.setString(2, e.lastName);
-            pst.setString(3, e.firstName);
-            pst.setDate(4, java.sql.Date.valueOf(e.birthday));
-            pst.setString(5, e.jobTitle);
-            pst.setString(6, e.phoneNumber);
-            pst.setDate(7, java.sql.Date.valueOf(e.joinDate));
+            pst = connection.prepareStatement(sqlCommand);
+            pst.setInt(1, e.getEmployeeId());
+            pst.setString(2, e.getLastName());
+            pst.setString(3, e.getFirstName());
+            pst.setDate(4, java.sql.Date.valueOf(e.getBirthday()));
+            pst.setString(5, e.getJobTitle());
+            pst.setString(6, e.getPhoneNumber());
+            pst.setDate(7, java.sql.Date.valueOf(e.getJoinDate()));
+            pst.setString(8, e.getPassCode());
             if (pst.executeUpdate() > 0) {
                 employeeManagement.addEmployee(e);
-                System.out.println("Thêm nhân viên thành công: " + e.employeeId);
+                System.out.println("Thêm nhân viên thành công: " + e.getEmployeeId());
             } else {
                 System.out.println("Chưa thể thêm nhân viên!");
             }
@@ -162,7 +170,7 @@ public class SQL {
     }
 
     //xóa nhân viên
-    public boolean deleteEmployees(int maNV) {
+    public static void deleteEmployees(int maNV) {
         String sqlCommand = "delete from " + tableEmployee + " where eID = ?";
         PreparedStatement pst = null;
         try {
@@ -176,9 +184,32 @@ public class SQL {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+//            return false;
+        }
+//        return false;
+    }
+
+    public static boolean fixInfoEmployee(int id, String lastName, String firstName, LocalDate birth, String jobTitle, String phone) {
+        String sqlCommand = "UPDATE " + tableEmployee + " SET lastName = ?, firstName = ?, birthday = ?,jobTitle = ?, numberPhone = ? WHERE eID = " + id;
+        PreparedStatement pst = null;
+        try {
+            pst = connection.prepareStatement(sqlCommand);
+            pst.setString(1, lastName);
+            pst.setString(2, firstName);
+            pst.setDate(3, java.sql.Date.valueOf(birth));
+            pst.setString(4, jobTitle);
+            pst.setString(5, phone);
+            if (pst.executeUpdate() > 0) {
+                System.out.println("Đã sửa nhân viên" + id);
+                return true;
+            } else {
+                System.out.println("Không có nhân viên cần sửa!");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
-        return false;
     }
 
     // In món ăn
@@ -228,6 +259,7 @@ public class SQL {
         }
         return false;
     }
+
     public static ResultSet checkID2(int id, String pc) {
         ResultSet rs = null;
         String sqlCommand = "select * from " + tableEmployee + " where eID = " + id;
@@ -242,7 +274,7 @@ public class SQL {
         return rs;
     }
 
-    public static void addBilldetails(food x, int bID) {
+    public static void addBillDetails(food x, int bID) {
         ResultSet rs = null;
         String sqlCommand = "INSERT INTO billdetails (fID, fPrice, bID) " +
                 "VALUES (?, ?, ?)";
@@ -254,7 +286,7 @@ public class SQL {
             //pst.setString(3, "none");
             pst.setInt(3, bID);
             if (pst.executeUpdate() > 0) {
-                System.out.println("update success :" + pst.executeUpdate());
+                System.out.println("update success :" + bID);
             } else {
                 System.out.println("update billdetails error");
             }
@@ -302,6 +334,60 @@ public class SQL {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+//    public ResultSet allBills() {
+//        ResultSet rs = null;
+//        String sqlCommand = "select * from " + tableBill;
+//        Statement st;
+//        try {
+//            st = connection.createStatement();
+//            rs = st.executeQuery(sqlCommand);
+//        } catch (SQLException e) {
+//            System.out.println("Select error");
+//            e.printStackTrace();
+//        }
+//        return rs;
+//    }
+//
+//    // thêm tất cả nhân viên vào danh sách
+//    public void getAllBill(ResultSet rs) throws SQLException {
+//        while (rs.next()) {
+//            billManagement.addBill(new bill(rs.getInt(1)
+//                    , rs.getInt(2)
+//                    , rs.getInt(3)
+//                    , Instant.ofEpochMilli(rs.getDate(4).getTime()).atZone(ZoneId.systemDefault()).toTimeSpam()
+//                    , Instant.ofEpochMilli(rs.getDate(5).getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime()
+//                    , rs.getInt(6)));
+//        }
+//    }
+
+    // Bàn
+    public static ResultSet allTables() {
+        ResultSet rs = null;
+        String sqlCommand = "select * from " + tableDtable;
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+        } catch (SQLException e) {
+            System.out.println("Select error");
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static void getAllTablesSQL(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+//            List<food> f = new ArrayList<>();
+//            if(rs.getInt(3) != 0) {
+//                ResultSet rs1 = getFoodByBillId(rs.getInt(3));
+//                while (rs1.next()) {
+//                    f.add(foodManagement.allFood.get(foodManagement.getFoodIdxById(rs1.getInt(1))));
+//                }
+//            }
+            tableManagement.addTableToList(new table(rs.getInt(1), rs.getInt(3)));
         }
     }
 

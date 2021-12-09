@@ -1,5 +1,8 @@
 package employees;
 
+import SQL.SQL;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +21,16 @@ public class employeeManagement {
         return -1;
     }
 
-    public static boolean addEmployee(employee e) {
-        int idx = getEmployeeIdx(e);
-        if(idx >= 0) {
-            allEmployee.add(e);
-            return true;
+    public static void addEmployee(employee e) {
+        int dem = 0;
+        for(employee employee : allEmployee) {
+            if (employee.getEmployeeId() == e.getEmployeeId()) {
+                dem++;
+            }
         }
-        return false;
+        if (dem == 0) {
+            allEmployee.add(e);
+        }
     }
 
     public static boolean removeEmployee(int id) {

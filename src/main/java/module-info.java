@@ -20,4 +20,13 @@ module com.example.demo1 {
     exports Table;
 
     opens Food to javafx.base;
+
+    opens employees to javafx.base, javafx.fxml;
+    exports employees;
+
+    opens addEmployee to javafx.fxml;
+    exports addEmployee;
+
+    opens Bill to javafx.fxml;
+    exports Bill;
 }

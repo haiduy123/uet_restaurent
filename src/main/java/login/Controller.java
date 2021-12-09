@@ -38,10 +38,12 @@ public class Controller {
     public Controller() throws SQLException {
     }
 
+    public static int id;
+
     @FXML
     void dangNhap_btn(ActionEvent event) throws IOException, SQLException {
         sqlConnect.connect();
-        int id = Integer.parseInt(maDangNhap.getText());
+        id = Integer.parseInt(maDangNhap.getText());
         String pass = matKhau.getText();
         if (!SQL.checkID(id,pass)) {
             Alerts.showAlertWarning("Đăng nhập", "Đăng nhập không thành công");

@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 
 import static Bill.billManagement.billList;
 import static Table.checkTable.tableList;
+import static Table.tableManagement.clearTable;
 
 //import static Table.checkTable.table_list;
 
@@ -48,7 +49,7 @@ public class Controller implements Initializable {
     private TableColumn<food, Number> fPrice_Column;
 
     @FXML
-    private TableView<food> tableView;
+    private TableView<food> foodTableView;
 
     @FXML
     private ListView<String> listView;
@@ -60,7 +61,7 @@ public class Controller implements Initializable {
     private Button quayLai_btn;
 
     @FXML
-    private Button check_btn;
+    private Button checkBill_btn;
 
     private ObservableList<food> tableView_list;
 
@@ -69,7 +70,6 @@ public class Controller implements Initializable {
     public static int code;
     public static List<Button> foodButtonList = new ArrayList<>(16);
     public static List<Integer> quantityList = new ArrayList<>(16);
-    public TableView<food> secondTableView = new TableView<>();
     public List<Integer> sumPrice = new ArrayList<>();
     public List<Integer> listSum = new ArrayList<>();
     public static int codeBill;
@@ -82,7 +82,6 @@ public class Controller implements Initializable {
         }
     }
 
-    public foodManagement foodManagement = new foodManagement();
 
     public Controller() throws SQLException {
     }
@@ -93,24 +92,34 @@ public class Controller implements Initializable {
         for(food food : foodList) {
             quantityList.add(0);
         }
+
         for (int i = 0; i < foodButtonList.size(); i++) {
             if (event.getSource() == foodButtonList.get(i)) {
-                int id = Integer.parseInt(tableView.getColumns().get(0).getCellObservableValue(i).getValue().toString());
-                String name = tableView.getColumns().get(1).getCellObservableValue(i).getValue().toString();
-                int price = Integer.parseInt(tableView.getColumns().get(2).getCellObservableValue(i).getValue().toString());
+                int id = Integer.parseInt(foodTableView.getColumns().get(0).getCellObservableValue(i).getValue().toString());
+                String name = foodTableView.getColumns().get(1).getCellObservableValue(i).getValue().toString();
+                int price = Integer.parseInt(foodTableView.getColumns().get(2).getCellObservableValue(i).getValue().toString());
                 String quantityString = fQuantity_Column.getCellObservableValue(i).getValue().getText();
                 quantityList.set(i, Integer.valueOf(quantityString));
                 int quantity = quantityList.get(i);
 
                 foodList.get(i).getQuantity().setText(quantityString);
+
+                //chuyển đổi food sang string
                 String foodInfor = foodList.get(i).toString();
+                // thêm vào listView
+                Button button = new Button();
                 listView.getItems().add(foodInfor);
                 sum = price * quantity;
                 System.out.println(name + " " + price + " " + quantity);
                 sumPrice.add(sum);
-                Order(Integer.parseInt(tableView.getColumns().get(0).getCellObservableValue(i).getValue().toString()), name, price, quantity, listSum);
+
+                // đặt đồ (kéo xuống dưói để biết thêm chi tiết)
+                Order(Integer.parseInt(foodTableView.getColumns().get(0).getCellObservableValue(i).getValue().toString()), name, price, quantity, listSum);
 
                 food food = new food(id, name, price);
+
+                // thêm chi tiết
+                SQL.addBillDetails(food, codeBill);
 
                 for(bill bill : billList) {
                     if(bill.getBillId() == codeBill) {
@@ -121,19 +130,31 @@ public class Controller implements Initializable {
             }
         }
 
+        // tính tổng giá trị hóa đơn
         for (Integer i : sumPrice) {
             tmp += i;
         }
 
         billPrice.setText(String.valueOf(tmp));
     }
-    // thêm food vào food_list
+
+    // thêm food vào foodList
+    // foodList là List chứa food + textField + Button
     public void addFood() throws SQLException {
+        int dem = 0;
         for (food food : Food.foodManagement.allFood) {
             Button btn = new Button("ĐẶT ĐỒ");
             TextField textField = new TextField();
             food f = new food(food.getFoodId(), food.getName(), food.getPrice(),textField , btn);
-            foodList.add(f);
+
+            // Kiểm tra xem food đã có trong list chưa
+            // Nếu chưa có thì add
+            for (food food1 : foodList) {
+                if (food1.getFoodId() == f.getFoodId()) dem++;
+            }
+            if (dem == 0) {
+                foodList.add(f);
+            }
             foodButtonList.add(f.getBtn());
         }
     }
@@ -155,12 +176,11 @@ public class Controller implements Initializable {
 
 
         for (food f : foodList) {
-            tableView.getItems().add(f);
+            foodTableView.getItems().add(f);
         }
 
         for(int i = 0; i < foodButtonList.toArray().length; i++) {
             foodButtonList.get(i).setOnAction(this::buttonAction);
-
         }
     }
 
@@ -206,7 +226,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void check_btn(ActionEvent event) {
+    void checkBill_btn(ActionEvent event) {
         int sum = 0;
         for (table table : tableList) {
             if (table.getTableId() == code && table.getCurPrice() != 0) {
@@ -219,7 +239,7 @@ public class Controller implements Initializable {
         }
 
         billPrice.setText(String.valueOf(sum));
-        check_btn.setVisible(false);
+        checkBill_btn.setVisible(false);
     }
 
     @FXML
@@ -232,6 +252,7 @@ public class Controller implements Initializable {
                         bill.setPaymentTime(LocalDateTime.now());
                         bill.setTotalMoney(table.getCurPrice());
                         billID = bill.getBillId();
+                        bill.setEmployeeId(login.Controller.id);
                         SQL.addBill(bill);
                         System.out.println("correct");
                     }
@@ -244,6 +265,13 @@ public class Controller implements Initializable {
             System.out.println(bill.getBillId() + " ");
         }
 
+        for (table table : tableList) {
+            if (table.getTableId() == code) {
+                table.setBillId(0);
+                table.setCurPrice(0);
+                table.setFoods(new ArrayList<>());
+            }
+        }
         SQL.payBill(billID, LocalDateTime.now());
         Alerts.showAlertWarning("Thanh Toán", "Thanh Toán thành công");
     }

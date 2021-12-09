@@ -16,6 +16,11 @@ public class table {
 
     }
 
+    public table(int tableId, int billId) {
+        this.tableId = tableId;
+        this.billId = billId;
+    }
+
     public table(int tableId, int billId, List<food> foods) {
         this.tableId = tableId;
         this.billId = billId;

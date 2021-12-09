@@ -1,5 +1,6 @@
 package Bill;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,22 @@ public class bill {
     private LocalDateTime timeIn;
     private LocalDateTime paymentTime;
     private int employeeId;
+    private int discount;
 
     public int newBillId = 0;
 
 
     public bill() {
         employeeId = mainAccount.getUserID();
+    }
+
+    public bill(int id, int totalMoney, int discount, LocalDateTime timeIn, LocalDateTime paymentTime, int employeeId) {
+        this.billId = id;
+        this.totalMoney = totalMoney;
+        this.discount = discount;
+        this.timeIn = timeIn;
+        this.paymentTime = paymentTime;
+        this.employeeId =employeeId;
     }
 
     public bill(int bID, List<food> selectedFoods, List<String> foodNotes
@@ -90,11 +101,12 @@ public class bill {
         this.employeeId = employeeId;
     }
 
-    //tạo một hóa đơn mới
-    public void createNewBill() {
-        bill bill = new bill();
-        ++newBillId;
-        bill.setBillId(newBillId);
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     // thêm 1 sản phẩm mới vào bill
