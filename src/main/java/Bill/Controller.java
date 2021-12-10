@@ -2,15 +2,22 @@ package Bill;
 
 import Food.food;
 import SQL.SQL;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,9 +47,12 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<bill, Integer> emploteeId_Column;
 
+    @FXML
+    private Button billBack;
+
     public void addBIll() throws SQLException {
         SQL sql = new SQL();
-//        sql.getAllBill(sql.allBills());
+        sql.getAllBillsSQL(sql.allBills());
     }
 
     @Override
@@ -63,9 +73,15 @@ public class Controller implements Initializable {
         for (bill bill : billManagement.allBill) {
             billTableView.getItems().add(bill);
         }
+    }
 
-//        for(int i = 0; i < foodButtonList.toArray().length; i++) {
-//            foodButtonList.get(i).setOnAction(this::buttonAction);
-//        }
+    @FXML
+    void billBack(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/start.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) billBack.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 }

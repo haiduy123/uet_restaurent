@@ -19,7 +19,8 @@ module com.example.demo1 {
     opens Table to javafx.fxml;
     exports Table;
 
-    opens Food to javafx.base;
+    opens Food to javafx.base, javafx.fxml;
+    exports Food;
 
     opens employees to javafx.base, javafx.fxml;
     exports employees;
@@ -29,4 +30,7 @@ module com.example.demo1 {
 
     opens Bill to javafx.fxml;
     exports Bill;
+
+    opens addFood to javafx.fxml;
+    exports addFood;
 }

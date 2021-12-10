@@ -113,4 +113,8 @@ public class bill {
     public void addNewFood(food food) {
         this.selectedFoods.add(food);
     }
+
+    public void getFoodToList(int foodId) {
+        this.selectedFoods.add(foodManagement.allFood.get(foodManagement.getFoodIdxById(foodId)));
+    }
 }

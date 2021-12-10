@@ -8,96 +8,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="614.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Order.Controller">
-   <children>
-      <AnchorPane layoutX="3.0" prefHeight="640.0" prefWidth="645.0">
-         <children>
-            <Button fx:id="ban1_btn" layoutX="67.0" layoutY="103.0" mnemonicParsing="false" onAction="#ban1_btn" prefHeight="50.0" prefWidth="82.0" text="1" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="ban2_btn" layoutX="187.0" layoutY="103.0" mnemonicParsing="false" onAction="#ban2_btn" prefHeight="50.0" prefWidth="82.0" text="2" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="check_btn" layoutX="276.0" layoutY="43.0" mnemonicParsing="false" onAction="#check_btn" prefHeight="36.0" prefWidth="75.0" text="Kiểm Tra" />
-            <Button fx:id="ban3_btn" layoutX="310.0" layoutY="103.0" mnemonicParsing="false" onAction="#ban3_btn" prefHeight="50.0" prefWidth="82.0" text="3" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <ListView fx:id="test" layoutX="203.0" layoutY="338.0" prefHeight="200.0" prefWidth="200.0" />
-            <ImageView fitHeight="242.0" fitWidth="309.0" layoutX="-19.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/slogan_01.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="242.0" fitWidth="309.0" layoutX="428.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/slogan_02.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="541.0" layoutY="573.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="61.0" text="Button" />
-            <Button fx:id="ban4_btn" layoutX="310.0" layoutY="178.0" mnemonicParsing="false" onAction="#ban4_btn" prefHeight="50.0" prefWidth="82.0" text="4" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="ban5_btn" layoutX="451.0" layoutY="183.0" mnemonicParsing="false" onAction="#ban5_btn" prefHeight="50.0" prefWidth="82.0" text="5" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="ban6_btn" layoutX="67.0" layoutY="183.0" mnemonicParsing="false" onAction="#ban6_btn" prefHeight="50.0" prefWidth="82.0" text="6" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="ban7_btn" layoutX="492.0" layoutY="61.0" mnemonicParsing="false" onAction="#ban7_btn" prefHeight="50.0" prefWidth="82.0" text="7" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="ban8_btn" layoutX="187.0" layoutY="178.0" mnemonicParsing="false" onAction="#ban8_btn" prefHeight="50.0" prefWidth="82.0" text="8" >
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="82.0" layoutX="83.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icon/table.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane fx:id="order_container" prefHeight="774.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Order.Controller">
+    <children>
+        <TableView fx:id="foodTableView" layoutX="22.0" layoutY="321.0" prefHeight="378.0" prefWidth="668.0">
+            <columns>
+                <TableColumn fx:id="fID_Column" prefWidth="75.0" styleClass="centered-table-column" text="ID" />
+                <TableColumn fx:id="fName_Column" prefWidth="168.0" styleClass="centered-table-column" text="TÊN MÓN" />
+                <TableColumn fx:id="fPrice_Column" prefWidth="87.0" styleClass="centered-table-column" text="GIÁ" />
+                <TableColumn fx:id="fQuantity_Column" prefWidth="89.0" styleClass="centered-table-column" text="SỐ LƯỢNG" />
+                <TableColumn fx:id="fButton_Column" prefWidth="89.0" styleClass="centered-table-column" text="ORDER" />
+            </columns>
+        </TableView>
+        <ListView fx:id="listView" layoutX="729.0" layoutY="349.0" prefHeight="250.0" prefWidth="250.0" />
+        <Label fx:id="billPrice" alignment="CENTER" layoutX="751.0" layoutY="669.0" prefHeight="30.0" prefWidth="205.0" text="" textFill="#f1e9e9">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Label>
+        <Button fx:id="quayLai_btn" layoutX="53.0" layoutY="724.0" mnemonicParsing="false" onAction="#quayLai_btn" text="Quay Lại" />
+        <Button fx:id="checkBill_btn" layoutX="916.0" layoutY="724.0" mnemonicParsing="false" onAction="#checkBill_btn" text="Check" />
+        <Button fx:id="thanhToan_btn" layoutX="729.0" layoutY="724.0" mnemonicParsing="false" onAction="#thanhToan_btn" text="Thanh Toán" />
+        <Label fx:id="thanhTien" layoutX="806.0" layoutY="623.0" text="Thành Tiền" textFill="#f1e9e9">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Label>
+        <ImageView fitHeight="257.0" fitWidth="418.0" layoutX="22.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../image/banner1.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="257.0" fitWidth="418.0" layoutX="391.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../image/banner2.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="257.0" fitWidth="418.0" layoutX="759.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../image/banner3.jpg" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

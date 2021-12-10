@@ -34,9 +34,12 @@ public class SQL {
 //        mainAccount.logIn();
         getAllEmployees(allEmployees());
         getAllFoodsSQL(allFoods());
-//        getAllBill(allBills());
-        //getWords(getAllWord());
-        //wordList();
+        getAllTablesSQL(allTables());
+        getAllBillsSQL(allBills());
+        getNewBillIdSQL();
+//        getNewFoodIdSQL();
+//        getNewTableIdSQL();
+//        geNewEmployeeIdSQL();
     }
 
 
@@ -69,20 +72,23 @@ public class SQL {
         return id;
     }
 
-//    public static void getNewFoodIdSQL() {
-//        ResultSet rs = null;
-//        String sqlCommand = "SELECT * FROM " + tableFood + " ORDER BY fID DESC LIMIT 1";
-//        Statement st;
-//        try {
-//            st = connection.createStatement();
-//            rs = st.executeQuery(sqlCommand);
-//            rs.next();
+    public static int getNewFoodIdSQL() {
+        ResultSet rs = null;
+        String sqlCommand = "SELECT * FROM " + tableFood + " ORDER BY fID DESC LIMIT 1";
+        Statement st;
+        int id = 0;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+            rs.next();
 //            foodManagement.newFoodId = rs.getInt(1);
-//        } catch (SQLException e) {
-//            System.out.println("Select error");
-//            e.printStackTrace();
-//        }
-//    }
+            id = rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("Select error");
+            e.printStackTrace();
+        }
+        return  id;
+    }
 
 //    public static void getNewTableIdSQL() {
 //        ResultSet rs = null;
@@ -234,7 +240,7 @@ public class SQL {
     }
 
     //xóa món ăn
-    public void deleteFood(int maMon) {
+    public static void deleteFood(int maMon) {
         String sqlCommand = "delete from " + tableFood + " where fID = ?";
         PreparedStatement pst = null;
         try {
@@ -248,6 +254,43 @@ public class SQL {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    // sửa món ăn
+    public static void fixFoodSQL(int id, String name, int price) {
+        String sqlCommand = "UPDATE " + tableFood + " SET fName = ?, fPrice = ?  WHERE fID = " + id;
+        PreparedStatement pst = null;
+        try {
+            pst = connection.prepareStatement(sqlCommand);
+            pst.setString(1, name);
+            pst.setInt(2, price);
+            if (pst.executeUpdate() > 0) {
+                System.out.println("Đã sửa món ăn" + id);
+            } else {
+                System.out.println("Không có món ăn cần sửa!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addNewFoodSQL(food e) {
+        String sqlCommand = "insert into " + tableFood + " value( ?, ?, ?)";
+        PreparedStatement pst = null;
+        try {
+            pst = connection.prepareStatement(sqlCommand);
+            pst.setInt(1, e.getFoodId());
+            pst.setString(2, e.getName());
+            pst.setInt(3, e.getPrice());
+            if (pst.executeUpdate() > 0) {
+                foodManagement.addFood(e);
+                System.out.println("Thêm món ăn thành công: " + e.getFoodId());
+            } else {
+                System.out.println("Chưa thể thêm món ăn!");
+            }
+        } catch (SQLException x) {
+            x.printStackTrace();
         }
     }
 
@@ -337,32 +380,80 @@ public class SQL {
         }
     }
 
-//    public ResultSet allBills() {
-//        ResultSet rs = null;
-//        String sqlCommand = "select * from " + tableBill;
-//        Statement st;
-//        try {
-//            st = connection.createStatement();
-//            rs = st.executeQuery(sqlCommand);
-//        } catch (SQLException e) {
-//            System.out.println("Select error");
-//            e.printStackTrace();
-//        }
-//        return rs;
-//    }
-//
-//    // thêm tất cả nhân viên vào danh sách
-//    public void getAllBill(ResultSet rs) throws SQLException {
-//        while (rs.next()) {
-//            billManagement.addBill(new bill(rs.getInt(1)
-//                    , rs.getInt(2)
-//                    , rs.getInt(3)
-//                    , Instant.ofEpochMilli(rs.getDate(4).getTime()).atZone(ZoneId.systemDefault()).toTimeSpam()
-//                    , Instant.ofEpochMilli(rs.getDate(5).getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime()
-//                    , rs.getInt(6)));
-//        }
-//    }
+    //Nhận vào tất cả hóa đơn
+    public ResultSet allBills() {
+        ResultSet rs = null;
+        String sqlCommand = "select * from " + tableBill;
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+        } catch (SQLException e) {
+            System.out.println("Select bill error");
+            e.printStackTrace();
+        }
+        return rs;
+    }
 
+    public void getAllBillsSQL(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            billManagement.addBill(SQL.getInfoBill(rs.getInt(1)));
+        }
+    }
+
+
+    public static bill getInfoBill(int billId) throws SQLException {
+        ResultSet rs = getInfoBillSQL(billId);
+        ResultSet rs1 = getFoodByBillId(billId);
+        bill nb = new bill();
+        nb.setBillId(billId);
+        if (rs == null) return null;
+        while (rs.next()) {
+            nb.setTotalMoney(rs.getInt(2));
+            if (rs.getTimestamp(4) != null) {
+                nb.setTimeIn(rs.getTimestamp(4).toLocalDateTime());
+            }
+            if (rs.getTimestamp(5) != null) {
+                nb.setPaymentTime(rs.getTimestamp(5).toLocalDateTime());
+            }
+            nb.setEmployeeId(rs.getInt(6));
+//            nb.set = rs.getInt(7);
+        }
+        while (rs1.next()) {
+            nb.getFoodToList(rs1.getInt(1));
+        }
+        return nb;
+    }
+
+    // lấy các món ăn từ SQl thông qua mã hóa đơn
+    public static ResultSet getFoodByBillId(int billId) {
+        ResultSet rs = null;
+        String sqlCommand = "select * from " + tableBilldetails + " where bID = " + billId;
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+        } catch (SQLException e) {
+            System.out.println("lỗi lấy thông tin món ăn của hóa đơn");
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    // in thông tin hóa đơn qua mã hóa đơn
+    public static ResultSet getInfoBillSQL(int billId) {
+        ResultSet rs = null;
+        String sqlCommand = "select * from " + tableBill + " where bID = " + billId;
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+        } catch (SQLException e) {
+            System.out.println("lỗi lấy thông tin hóa đơn");
+            e.printStackTrace();
+        }
+        return rs;
+    }
     // Bàn
     public static ResultSet allTables() {
         ResultSet rs = null;

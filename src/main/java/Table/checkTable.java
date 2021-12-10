@@ -33,6 +33,9 @@ public class checkTable {
     private Button checkTable_btn;
 
     @FXML
+    private Button tableBack;
+
+    @FXML
     private Button logout_btn;
 
     @FXML
@@ -41,7 +44,7 @@ public class checkTable {
     public static ArrayList<table> tableList = new ArrayList<>();
 
     private ArrayList<Button> buttonList = new ArrayList<>();
-    URL url = new File("src/main/resources/com/example/demo1/menu_food.fxml").toURI().toURL();
+    URL url = new File("src/main/resources/com/example/demo1/order.fxml").toURI().toURL();
     File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
 
     public checkTable() throws MalformedURLException, SQLException {
@@ -141,7 +144,7 @@ public class checkTable {
             if (table.getCurPrice() == 0) {
                 for(Button btn : buttonList) {
                     if (Integer.parseInt(btn.getText()) == tmp.getTableId()) {
-                        btn.setStyle("-fx-background-color: green;");
+                        btn.setStyle("-fx-background-color: #00FF99;");
                     }
                 }
             }
@@ -182,6 +185,16 @@ public class checkTable {
         if(dem == 0) {
             buttonList.add(btn);
         }
+    }
+
+    @FXML
+    void tableBack(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/start.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) tableBack.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
     void check_table(table tmp) {

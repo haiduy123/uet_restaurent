@@ -53,4 +53,34 @@ public class Controller {
         window.setScene(new Scene(root));
     }
 
+    @FXML
+    void hoaDon_btn(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/bill.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) hoaDon_btn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
+    @FXML
+    void nhanVien_btn(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/employees.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) nhanVien_btn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
+    @FXML
+    void thucDon_btn(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/food.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) thucDon_btn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
 }

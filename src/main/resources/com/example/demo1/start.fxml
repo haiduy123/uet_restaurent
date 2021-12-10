@@ -18,7 +18,7 @@
               </ImageView>
           </graphic>
       </Button>
-      <Button fx:id="thucDon_btn" layoutX="204.0" layoutY="255.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="128.0">
+      <Button fx:id="thucDon_btn" layoutX="204.0" layoutY="255.0" mnemonicParsing="false" onAction="#thucDon_btn" prefHeight="94.0" prefWidth="128.0">
           <graphic>
               <ImageView fx:id="thucDon_img" fitHeight="94.0" fitWidth="128.0" layoutX="102.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -27,7 +27,7 @@
               </ImageView>
           </graphic>
       </Button>
-      <Button fx:id="hoaDon_btn" layoutX="375.0" layoutY="139.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="112.0">
+      <Button fx:id="hoaDon_btn" layoutX="375.0" layoutY="139.0" mnemonicParsing="false" onAction="#hoaDon_btn" prefHeight="65.0" prefWidth="112.0">
           <graphic>
               <ImageView fx:id="hoaDon_img" fitHeight="94.0" fitWidth="112.0" layoutX="404.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -36,7 +36,7 @@
               </ImageView>
           </graphic>
       </Button>
-      <Button fx:id="nhanVien_btn" layoutX="375.0" layoutY="269.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="112.0">
+      <Button fx:id="nhanVien_btn" layoutX="375.0" layoutY="269.0" mnemonicParsing="false" onAction="#nhanVien_btn" prefHeight="66.0" prefWidth="112.0">
           <graphic>
               <ImageView fx:id="nhanVien_img" fitHeight="94.0" fitWidth="112.0" layoutX="421.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                   <image>

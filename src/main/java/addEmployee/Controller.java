@@ -1,5 +1,6 @@
 package addEmployee;
 
+import Alert.Alerts;
 import SQL.SQL;
 import employees.employee;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -28,7 +30,7 @@ public class Controller {
     private TextField birthDay;
 
     @FXML
-    private Button addNew_btn;
+    private Button add_btn;
 
     @FXML
     private TextField phoneNumber;
@@ -43,7 +45,10 @@ public class Controller {
     private TextField passCode;
 
     @FXML
-    void addNew_btn(ActionEvent event) {
+    private AnchorPane addEmployee;
+
+    @FXML
+    void add_btn(ActionEvent event) {
         String lName = lastName.getText();
         String fName = firstName.getText();
         String birth = birthDay.getText();
@@ -62,6 +67,8 @@ public class Controller {
         e.setPassCode(pass);
         e.setJobTitle(title);
         SQL.addEmployeeSQL(e);
+
+        Alerts.showAlertInfo("Thêm Nhân Viên", "Thêm thành công");
     }
 
     @FXML

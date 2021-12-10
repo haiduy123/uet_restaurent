@@ -9,7 +9,14 @@ public class food {
     private int price;
     private TextField quantity;
     private Button btn;
+    private Button fixButton;
+    private Button deleteButton;
+    private TextField textPrice = new TextField();
+    private TextField textName = new TextField();
 
+    public food() {
+
+    }
     public food(int foodId, String name, int price) {
         this.foodId= foodId;
         this.name = name;
@@ -29,6 +36,14 @@ public class food {
         this.price = price;
         this.quantity = textField;
         this.btn = btn;
+    }
+
+    public food(int foodId, TextField textName, TextField textPrice, Button fixButton, Button deleteButton) {
+        this.foodId= foodId;
+        this.textName = textName;
+        this.textPrice = textPrice;
+        this.fixButton = fixButton;
+        this.deleteButton = deleteButton;
     }
 
     public int getFoodId() {
@@ -71,6 +86,37 @@ public class food {
         this.btn = btn;
     }
 
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public void setDeleteButton(Button deleteButton) {
+        this.deleteButton = deleteButton;
+    }
+
+    public TextField getTextName() {
+        return textName;
+    }
+
+    public void setTextName(TextField textName) {
+        this.textName = textName;
+    }
+
+    public TextField getTextPrice() {
+        return textPrice;
+    }
+
+    public void setTextPrice(TextField textPrice) {
+        this.textPrice = textPrice;
+    }
+
+    public Button getFixButton() {
+        return fixButton;
+    }
+
+    public void setFixButton(Button fixButton) {
+        this.fixButton = fixButton;
+    }
 
     public String getInfor() {
         return this.foodId + " " + this.name + "  vnd" + this.price;

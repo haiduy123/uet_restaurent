@@ -1,5 +1,7 @@
 package Food;
 
+import employees.employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +27,15 @@ public class foodManagement {
     }
 
     public static void addFood(food f) {
-        allFood.add(f);
-//        Order.Controller.food_list.add(f);
+        int dem = 0;
+        for(food food : allFood) {
+            if (food.getFoodId() == f.getFoodId()) {
+                dem++;
+            }
+        }
+        if (dem == 0) {
+            allFood.add(f);
+        }
     }
 
     public boolean removeFood(food f) {

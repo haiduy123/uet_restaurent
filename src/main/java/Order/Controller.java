@@ -125,6 +125,7 @@ public class Controller implements Initializable {
                     if(bill.getBillId() == codeBill) {
                         bill.addNewFood(food);
                         bill.setTotalMoney(sum);
+//                        tmp = bill.getTotalMoney();
                     }
                 }
             }
@@ -134,6 +135,12 @@ public class Controller implements Initializable {
         for (Integer i : sumPrice) {
             tmp += i;
         }
+
+//        for(bill bill : billList) {
+//            if(bill.getBillId() == codeBill) {
+//                tmp
+//            }
+//        }
 
         billPrice.setText(String.valueOf(tmp));
     }

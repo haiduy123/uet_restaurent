@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         //tải lên giao diên chính
-        URL url = new File("src/main/resources/com/example/demo1/menu_food.fxml").toURI().toURL();
+        URL url = new File("src/main/resources/com/example/demo1/order.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
 
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");

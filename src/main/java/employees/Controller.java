@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -63,6 +64,13 @@ public class Controller implements Initializable {
     @FXML
     private Button addButton;
 
+    @FXML
+    private Button back_btn;
+
+
+    @FXML
+    private AnchorPane employeeContainer;
+
     public List<employee> employeesList= new ArrayList<>();
     public List<Button> fixButtonList = new ArrayList<>();
     public List<Button> deleteButtonList = new ArrayList<>();
@@ -107,9 +115,7 @@ public class Controller implements Initializable {
         birthDay = LocalDate.parse(eBirthday_Column.getCellObservableValue(tmp).getValue().getText());
         jobTitle = eTitle_Column.getCellObservableValue(tmp).getValue().getText();
         phone = ePhone_Column.getCellObservableValue(tmp).getValue().getText();
-        joinDate = LocalDate.parse(eJoinDate_Column.getCellObservableValue(tmp).getValue().getText());
-////        birthDay = LocalDate.parse(“2021-12-12”);
-//        System.out.println(phone);
+
         SQL.fixInfoEmployee(id, lastName, firstName, birthDay, jobTitle, phone);
         for(employee employee : employeeManagement.allEmployee) {
             if (employee.getEmployeeId() == id) {
@@ -132,6 +138,16 @@ public class Controller implements Initializable {
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
         root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
         Stage window = (Stage) addButton.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
+    @FXML
+    void back_btn (ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/start.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) back_btn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
@@ -163,6 +179,14 @@ public class Controller implements Initializable {
             employee.getTextJobTitle().setEditable(false);
             employee.getTextJoinDate().setEditable(false);
             employee.getTextPhone().setEditable(false);
+
+            employee.getTextId().setStyle("-fx-background-color: transparent;");
+            employee.getTextLastName().setStyle("-fx-background-color: transparent;");
+            employee.getTextFirstName().setStyle("-fx-background-color: transparent;");
+            employee.getTextBirthday().setStyle("-fx-background-color: transparent;");
+            employee.getTextJobTitle().setStyle("-fx-background-color: transparent;");
+            employee.getTextJoinDate().setStyle("-fx-background-color: transparent;");
+            employee.getTextPhone().setStyle("-fx-background-color: transparent;");
 
 
             // Kiểm tra xem food đã có trong list chưa
