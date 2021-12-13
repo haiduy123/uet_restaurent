@@ -94,6 +94,7 @@ public class Controller implements Initializable {
             if (event.getSource() == deleteButtonList.get(i)) {
                 int id = Integer.parseInt(employeesList.get(i).getTextId().getText());
                 SQL.deleteEmployees(id);
+                Alerts.showAlertWarning("Xóa Nhân Viên", "Xóa Thành Công");
             }
         }
     }

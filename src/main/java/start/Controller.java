@@ -38,6 +38,9 @@ public class Controller {
     private Button thanhToan_btn;
 
     @FXML
+    private Button backStart;
+
+    @FXML
     private ImageView thucDon_img;
 
     @FXML
@@ -83,4 +86,13 @@ public class Controller {
         window.setScene(new Scene(root));
     }
 
+    @FXML
+    void backStart(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/login.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) backStart.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 }

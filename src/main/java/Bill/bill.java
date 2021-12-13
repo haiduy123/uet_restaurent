@@ -114,7 +114,15 @@ public class bill {
         this.selectedFoods.add(food);
     }
 
+    public void deleteFood(food food) {
+        this.selectedFoods.remove(food);
+    }
+
     public void getFoodToList(int foodId) {
-        this.selectedFoods.add(foodManagement.allFood.get(foodManagement.getFoodIdxById(foodId)));
+        for(food food : foodManagement.allFood) {
+            if (food.getFoodId() == foodId) {
+                this.selectedFoods.add(food);
+            }
+        }
     }
 }

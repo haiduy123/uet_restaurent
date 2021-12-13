@@ -50,6 +50,12 @@ public class Controller implements Initializable {
     @FXML
     private Button billBack;
 
+    @FXML
+    private Button searchBill_btn;
+
+    @FXML
+    private TextField search;
+
     public void addBIll() throws SQLException {
         SQL sql = new SQL();
         sql.getAllBillsSQL(sql.allBills());
@@ -82,6 +88,17 @@ public class Controller implements Initializable {
         File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
         root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
         Stage window = (Stage) billBack.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
+    @FXML
+    void searchBill_btn(ActionEvent event) throws IOException {
+        searchBill.Controller.time = search.getText();
+        URL url = new File("src/main/resources/com/example/demo1/searchBill.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) searchBill_btn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 }

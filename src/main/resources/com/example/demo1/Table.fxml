@@ -28,9 +28,9 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="checkTable_btn" layoutX="771.0" layoutY="565.0" mnemonicParsing="false" onAction="#checkTable_btn" prefHeight="47.0" prefWidth="47.0">
+        <Button fx:id="checkTable_btn" layoutX="771.0" layoutY="565.0" mnemonicParsing="false" onAction="#checkTable_btn" prefHeight="55.0" prefWidth="35.0">
             <graphic>
-                <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="312.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="50.0" fitWidth="31.0" layoutX="312.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon/check.png" />
                     </image>
@@ -47,9 +47,9 @@
             </graphic>
         </Button>
         <ListView fx:id="test" layoutX="28.0" layoutY="293.0" prefHeight="200.0" prefWidth="278.0" />
-        <Button fx:id="logout_btn" layoutX="861.0" layoutY="565.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="39.0">
+        <Button fx:id="logout_btn" layoutX="861.0" layoutY="565.0" mnemonicParsing="false" onAction="#logout_btn" prefHeight="55.0" prefWidth="47.0">
             <graphic>
-                <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="541.0" layoutY="573.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="541.0" layoutY="573.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon/logout.png" />
                     </image>
@@ -116,7 +116,7 @@
                 <Image url="@../../../image/res3.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="tableBack" layoutX="664.0" layoutY="565.0" mnemonicParsing="false" onAction="#tableBack" prefHeight="55.0" prefWidth="76.0">
+        <Button fx:id="tableBack" layoutX="682.0" layoutY="565.0" mnemonicParsing="false" onAction="#tableBack" prefHeight="55.0" prefWidth="47.0">
             <graphic>
                 <ImageView fitHeight="44.0" fitWidth="69.0" layoutX="1051.0" layoutY="668.0" pickOnBounds="true" preserveRatio="true">
                     <image>

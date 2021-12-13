@@ -86,6 +86,7 @@ public class Controller implements Initializable {
             if (event.getSource() == deleteButtonList.get(i)) {
                 int id = menuList.get(i).getFoodId();
                 SQL.deleteFood(id);
+                Alerts.showAlertWarning("Xóa Món", "Xóa Thành Công");
             }
         }
     }

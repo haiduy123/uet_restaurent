@@ -197,6 +197,16 @@ public class checkTable {
         window.setScene(new Scene(root));
     }
 
+    @FXML
+    void logout_btn(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/com/example/demo1/login.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+        Stage window = (Stage) logout_btn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
     void check_table(table tmp) {
         int dem = 0;
         for(table table : tableList) {
@@ -241,6 +251,5 @@ public class checkTable {
         table table8 = new table();
         table8.setTableId(Integer.parseInt(ban8_btn.getText()));
         check_table(table8);
-
     }
 }

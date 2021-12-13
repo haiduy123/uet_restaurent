@@ -10,13 +10,14 @@
 
 <AnchorPane fx:id="order_container" prefHeight="774.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Order.Controller">
     <children>
-        <TableView fx:id="foodTableView" layoutX="22.0" layoutY="321.0" prefHeight="378.0" prefWidth="668.0">
+        <TableView fx:id="foodTableView" layoutX="22.0" layoutY="321.0" prefHeight="378.0" prefWidth="672.0">
             <columns>
                 <TableColumn fx:id="fID_Column" prefWidth="75.0" styleClass="centered-table-column" text="ID" />
-                <TableColumn fx:id="fName_Column" prefWidth="168.0" styleClass="centered-table-column" text="TÊN MÓN" />
-                <TableColumn fx:id="fPrice_Column" prefWidth="87.0" styleClass="centered-table-column" text="GIÁ" />
-                <TableColumn fx:id="fQuantity_Column" prefWidth="89.0" styleClass="centered-table-column" text="SỐ LƯỢNG" />
-                <TableColumn fx:id="fButton_Column" prefWidth="89.0" styleClass="centered-table-column" text="ORDER" />
+                <TableColumn fx:id="fName_Column" prefWidth="194.0" styleClass="centered-table-column" text="TÊN MÓN" />
+                <TableColumn fx:id="fPrice_Column" prefWidth="86.0" styleClass="centered-table-column" text="GIÁ" />
+                <TableColumn fx:id="fQuantity_Column" prefWidth="105.0" styleClass="centered-table-column" text="SỐ LƯỢNG" />
+                <TableColumn fx:id="fButton_Column" prefWidth="90.0" styleClass="centered-table-column" text="ORDER" />
+            <TableColumn fx:id="fDelete_Column" prefWidth="121.0" styleClass="centered-table-column" text="DELETE" />
             </columns>
         </TableView>
         <ListView fx:id="listView" layoutX="729.0" layoutY="349.0" prefHeight="250.0" prefWidth="250.0" />
@@ -26,7 +27,7 @@
             </font></Label>
         <Button fx:id="quayLai_btn" layoutX="53.0" layoutY="724.0" mnemonicParsing="false" onAction="#quayLai_btn" text="Quay Lại" />
         <Button fx:id="checkBill_btn" layoutX="916.0" layoutY="724.0" mnemonicParsing="false" onAction="#checkBill_btn" text="Check" />
-        <Button fx:id="thanhToan_btn" layoutX="729.0" layoutY="724.0" mnemonicParsing="false" onAction="#thanhToan_btn" text="Thanh Toán" />
+        <Button fx:id="thanhToan_btn" layoutX="737.0" layoutY="724.0" mnemonicParsing="false" onAction="#thanhToan_btn" text="Thanh Toán" />
         <Label fx:id="thanhTien" layoutX="806.0" layoutY="623.0" text="Thành Tiền" textFill="#f1e9e9">
             <font>
                 <Font name="System Bold" size="18.0" />

@@ -38,13 +38,6 @@ public class foodManagement {
         }
     }
 
-    public boolean removeFood(food f) {
-        int idx = getFoodIdx(f);
-        if(idx >= 0){
-            allFood.remove(f);
-            return true;
-        } else return false;
-    }
 
     public static boolean removeFoodByID(int id) {
         int idx = getFoodIdxById(id);

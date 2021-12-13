@@ -215,7 +215,8 @@
     -fx-background-color: transparent;
 }
 
-#addButton:hover, #saveButton:hover, #back_btn:hover, #quayLai_btn:hover, #add_btn:hover {
+#addButton:hover, #saveButton:hover, #back_btn:hover, #quayLai_btn:hover, #add_btn:hover, #tableBack:hover, #checkTable_btn:hover,
+#searchBill_btn:hover, #billBack:hover, #foodBack:hover, #addBtn:hover, #saveMenu:hover, #backStart:hover {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-scale-z: 1.1;
@@ -325,5 +326,9 @@
 }
 
 #billBack, #tableBack {
+    -fx-background-color: transparent;
+}
+
+#searchBill_btn, #foodBack, #backStart {
     -fx-background-color: transparent;
 }

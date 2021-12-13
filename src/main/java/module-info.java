@@ -33,4 +33,7 @@ module com.example.demo1 {
 
     opens addFood to javafx.fxml;
     exports addFood;
+
+    opens searchBill to javafx.fxml;
+    exports searchBill;
 }

@@ -11,6 +11,7 @@ public class food {
     private Button btn;
     private Button fixButton;
     private Button deleteButton;
+    private Button orderDeleteButton;
     private TextField textPrice = new TextField();
     private TextField textName = new TextField();
 
@@ -45,6 +46,16 @@ public class food {
         this.fixButton = fixButton;
         this.deleteButton = deleteButton;
     }
+
+    public food(int foodId, String name, int price, TextField textField, Button btn, Button orderDeleteButton) {
+        this.foodId= foodId;
+        this.name = name;
+        this.price = price;
+        this.quantity = textField;
+        this.btn = btn;
+        this.orderDeleteButton = orderDeleteButton;
+    }
+
 
     public int getFoodId() {
         return foodId;
@@ -116,6 +127,14 @@ public class food {
 
     public void setFixButton(Button fixButton) {
         this.fixButton = fixButton;
+    }
+
+    public Button getOrderDeleteButton() {
+        return orderDeleteButton;
+    }
+
+    public void setOrderDeleteButton(Button orderDeleteButton) {
+        this.orderDeleteButton = orderDeleteButton;
     }
 
     public String getInfor() {

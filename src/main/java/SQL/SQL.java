@@ -454,6 +454,37 @@ public class SQL {
         }
         return rs;
     }
+
+
+    //in thông tin hóa đơn hóa đơn theo ngày được chỉ định
+    public static ResultSet getInfoBillByDateSQL(LocalDate date) {
+        ResultSet rs = null;
+        //Timestamp first = Timestamp.valueOf(date.atStartOfDay());
+        //Timestamp second = Timestamp.valueOf((date.plus(Period.ofDays(1))).atStartOfDay());
+        String sqlCommand = "select * from " + tableBill + " WHERE date(timeIn) = " + date;//+ " and date(timeIn) <= " + date.plus(Period.ofDays(1));
+        Statement st;
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(sqlCommand);
+        } catch (SQLException e) {
+            System.out.println("lỗi lấy thông tin hóa đơn");
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public static List<bill> getInfoBillByDate(LocalDate date) throws SQLException {
+        ResultSet rs = getInfoBillByDateSQL(date);
+        List<bill> bs = new ArrayList<>();
+        System.out.println(rs);
+        while (rs.next()) {
+            int x = rs.getInt(1);
+            System.out.println("haha");
+            bs.add(getInfoBill(x));
+        }
+        System.out.println(bs.size());
+        return bs;
+    }
     // Bàn
     public static ResultSet allTables() {
         ResultSet rs = null;
