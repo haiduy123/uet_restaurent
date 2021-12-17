@@ -3,7 +3,7 @@
 }
 
 #dangKy_btn, #quayLai_btn {
-    -fx-background-color: #d2721b;
+    -fx-background-color: red;
 }
 
 #checkTable_btn, #logout_btn {

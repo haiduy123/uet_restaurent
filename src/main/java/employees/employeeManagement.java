@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class employeeManagement {
-    static List<employee> allEmployee = new ArrayList<>();
+    public static List<employee> allEmployee = new ArrayList<>();
 
     public static int getEmployeeIdx(employee e) {
         return allEmployee.indexOf(e);

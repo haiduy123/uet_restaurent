@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="billContainer" prefHeight="651.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bill.Controller">
+<AnchorPane fx:id="billContainer" prefHeight="594.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bill.Controller">
     <children>
-        <TableView fx:id="billTableView" layoutX="172.0" layoutY="262.0" prefHeight="287.0" prefWidth="657.0">
+        <TableView fx:id="billTableView" layoutX="41.0" layoutY="229.0" prefHeight="287.0" prefWidth="657.0">
             <columns>
                 <TableColumn fx:id="bID_Column" prefWidth="75.0" text="Bill ID" />
                 <TableColumn fx:id="totalMoney_Column" prefWidth="144.0" text="Total Money" />
@@ -19,22 +19,22 @@
                 <TableColumn fx:id="emploteeId_Column" minWidth="4.0" prefWidth="132.0" text="Employee ID" />
             </columns>
         </TableView>
-        <ImageView fitHeight="190.0" fitWidth="410.0" layoutX="14.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="172.0" fitWidth="262.0" layoutX="14.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../image/bill1.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="190.0" fitWidth="410.0" layoutX="352.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="147.0" fitWidth="291.0" layoutX="276.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../image/bill2.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="190.0" fitWidth="410.0" layoutX="690.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="166.0" fitWidth="262.0" layoutX="537.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../image/bill3.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="billBack" layoutX="930.0" layoutY="583.0" mnemonicParsing="false" onAction="#billBack">
+        <Button fx:id="billBack" layoutX="515.0" layoutY="537.0" mnemonicParsing="false" onAction="#billBack">
             <graphic>
                 <ImageView fitHeight="37.0" fitWidth="59.0" layoutX="1051.0" layoutY="668.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -43,7 +43,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="searchBill_btn" layoutX="607.0" layoutY="590.0" mnemonicParsing="false" onAction="#searchBill_btn" prefHeight="35.0" prefWidth="39.0" >
+        <Button fx:id="searchBill_btn" layoutX="407.0" layoutY="540.0" mnemonicParsing="false" onAction="#searchBill_btn" prefHeight="35.0" prefWidth="39.0">
             <graphic>
                 <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="611.0" layoutY="587.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -52,8 +52,8 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TextField fx:id="search" layoutX="377.0" layoutY="585.0" prefHeight="35.0" prefWidth="191.0" promptText="NĂM-THÁNG-NGÀY" />
-        <Label layoutX="234.0" layoutY="585.0" prefHeight="35.0" prefWidth="118.0" text="Nhập Tìm Kiếm">
+        <TextField fx:id="search" layoutX="181.0" layoutY="542.0" prefHeight="35.0" prefWidth="191.0" promptText="NĂM-THÁNG-NGÀY" />
+        <Label layoutX="58.0" layoutY="542.0" prefHeight="35.0" prefWidth="118.0" text="Nhập Tìm Kiếm">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>

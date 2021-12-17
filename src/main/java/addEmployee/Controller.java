@@ -4,21 +4,24 @@ import Alert.Alerts;
 import SQL.SQL;
 import employees.employee;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     private TextField lastName;
@@ -42,10 +45,20 @@ public class Controller {
     private TextField jobTitle;
 
     @FXML
+    private ContextMenu contextMenu;
+
+    @FXML
+    private MenuItem item2;
+
+    @FXML
+    private MenuItem item1;
+
+    @FXML
     private TextField passCode;
 
     @FXML
     private AnchorPane addEmployee;
+
 
     @FXML
     void add_btn(ActionEvent event) {
@@ -81,4 +94,18 @@ public class Controller {
         window.setScene(new Scene(root));
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        jobTitle.setEditable(false);
+    }
+
+    @FXML
+    void item1(ActionEvent event) {
+        jobTitle.setText(item1.getText());
+    }
+
+    @FXML
+    void item2(ActionEvent event) {
+        jobTitle.setText(item2.getText());
+    }
 }

@@ -95,7 +95,8 @@ public class Controller implements Initializable {
 
     private void buttonAction(ActionEvent event) {
         int sum = 0, tmp = 0;
-
+        List<food> newList = new ArrayList<>(100);
+        List<String> delListView = new ArrayList<>(100);
         for (food food : foodList) {
             quantityList.add(0);
         }
@@ -126,7 +127,7 @@ public class Controller implements Initializable {
                 food food = new food(id, name, price);
 
                 // thêm chi tiết
-                SQL.addBillDetails(food, codeBill);
+//                SQL.addBillDetails(food, codeBill);
 
                 for (bill bill : billList) {
                     if (bill.getBillId() == codeBill) {
@@ -135,9 +136,58 @@ public class Controller implements Initializable {
                     }
                 }
             }
+
+            int del;
+            if (event.getSource() == deleteButtonList.get(i)) {
+                del = i + 1;
+                for (table table : tableList) {
+                    if (table.getTableId() == code) {
+                        for (food food : table.getFoods()) {
+                            if (food.getFoodId() == Integer.parseInt(foodTableView.getColumns().get(0).getCellObservableValue(i).getValue().toString())) {
+                                newList.add(food);
+                                table.setCurPrice(table.getCurPrice() - Integer.parseInt(food.getQuantity().getText()) * food.getPrice());
+                                for (bill bill : billList) {
+                                    if (bill.getBillId() == codeBill) {
+                                        bill.deleteFood(food);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                String delString = "";
+                for (food food : foodList) {
+                    if (food.getFoodId() == Integer.parseInt(foodTableView.getColumns().get(0).getCellObservableValue(i).getValue().toString())) {
+                        System.out.println("haha");
+                        delString = food.toString();
+                    }
+                }
+
+                for (Object o : listView.getItems()) {
+                    if (o != null && o.equals(delString)) {
+                        delListView.add(delString);
+                    }
+                }
+
+                listView.getItems().removeAll(delListView);
+
+                for (table table : tableList) {
+                    if (table.getTableId() == code) {
+                        table.getFoods().removeAll(newList);
+                    }
+                }
+
+            }
         }
+//        System.out.println(newList.size());
 
         //update 12/12
+        for (table table : tableList) {
+            if (table.getTableId() == code) {
+                tmp = table.getCurPrice();
+            }
+        }
+
         for (table table : tableList) {
             if (table.getTableId() == code) {
                 tmp = table.getCurPrice();
@@ -151,33 +201,52 @@ public class Controller implements Initializable {
     // foodList là List chứa food + textField + Button
     public void addFood() throws SQLException {
         SQL.getAllFoodsSQL(SQL.allFoods());
-        int dem = 0;
+        List<food> delFood = new ArrayList<>();
+        List<Button> delButtonList = new ArrayList<>();
 
         for (food food : foodManagement.allFood) {
+            int dem = 0;
             Button btn = new Button("ĐẶT ĐỒ");
+            Button delButton = new Button("XÓA MÓN");
             TextField textField = new TextField();
-            food f = new food(food.getFoodId(), food.getName(), food.getPrice(), textField, btn);
+            food f = new food(food.getFoodId(), food.getName(), food.getPrice(), textField, btn, delButton);
 
             // Kiểm tra xem food đã có trong list chưa
             // Nếu chưa có thì add
             for (food food1 : foodList) {
                 if (food1.getFoodId() == f.getFoodId()) {
+                    dem++;
                     if (food1.getPrice() != f.getPrice() || !food1.getName().equals(f.getName())) {
                         food1.setPrice(f.getPrice());
                         food1.setName(f.getName());
-                        dem++;
                     }
                 }
+                System.out.println(food.getFoodId() + " " + food1.getFoodId() + " " + dem);
             }
             if (dem == 0) {
                 foodList.add(f);
             }
 
             foodButtonList.add(f.getBtn());
+            deleteButtonList.add(f.getOrderDeleteButton());
         }
 
-        System.out.println(foodManagement.allFood.size());
-        System.out.println(foodList.size());
+        for (food food : foodList) {
+            int dem = 0;
+
+            for(food f : foodManagement.allFood) {
+                if (food.getFoodId() == f.getFoodId()) {
+                    dem++;
+                }
+            }
+            if (dem == 0) {
+                delFood.add(food);
+                delButtonList.add(food.getBtn());
+            }
+        }
+
+        foodList.removeAll(delFood);
+        foodButtonList.removeAll(delButtonList);
     }
 
 
@@ -195,10 +264,10 @@ public class Controller implements Initializable {
         fPrice_Column.setCellValueFactory(new PropertyValueFactory<food, Number>("price"));
         fQuantity_Column.setCellValueFactory(new PropertyValueFactory<food, TextField>("quantity"));
         fButton_Column.setCellValueFactory(new PropertyValueFactory<food, Button>("btn"));
-        fDelete_Column.setCellValueFactory(new PropertyValueFactory<food, Button>("deleteButton"));
-
+        fDelete_Column.setCellValueFactory(new PropertyValueFactory<food, Button>("orderDeleteButton"));
         fQuantity_Column.setText(" ");
 
+        foodTableView.getColumns().get(2).setText("");
 
         for (food f : foodList) {
             foodTableView.getItems().add(f);
@@ -255,7 +324,6 @@ public class Controller implements Initializable {
             if (table.getTableId() == code && table.getCurPrice() != 0) {
                 sum = table.getCurPrice();
                 for (food food : table.getFoods()) {
-//                    sum += food.getPrice() * Integer.parseInt(food.getQuantity().getText());
                     String tmp = food.toString();
                     listView.getItems().add(tmp);
                 }
@@ -269,6 +337,15 @@ public class Controller implements Initializable {
     @FXML
     void thanhToan_btn(ActionEvent event) {
         int billID = 0;
+
+        for (table table : tableList) {
+            if (table.getTableId() == code) {
+                for (food food : table.getFoods()) {
+                    SQL.addBillDetails(food, codeBill);
+                }
+            }
+        }
+
         for (table table : tableList) {
             if (table.getTableId() == code) {
                 for (bill bill : billList) {
@@ -281,7 +358,6 @@ public class Controller implements Initializable {
                         System.out.println("correct");
                     }
                 }
-//                System.out.println("correct");
             }
         }
 

@@ -13,10 +13,18 @@
       <TextField fx:id="lastName" layoutX="289.0" layoutY="50.0" prefHeight="38.0" prefWidth="184.0" promptText="Last Name" />
       <TextField fx:id="firstName" layoutX="289.0" layoutY="104.0" prefHeight="38.0" prefWidth="184.0" promptText="First Name" />
       <TextField fx:id="birthDay" layoutX="289.0" layoutY="157.0" prefHeight="38.0" prefWidth="184.0" promptText="Birthday" />
-      <TextField fx:id="jobTitle" layoutX="289.0" layoutY="207.0" prefHeight="38.0" prefWidth="184.0" promptText="Job Title" />
+      <TextField fx:id="jobTitle" layoutX="289.0" layoutY="207.0" prefHeight="38.0" prefWidth="184.0" promptText="Job Title">
+         <contextMenu>
+            <ContextMenu fx:id="contextMenu">
+              <items>
+                <MenuItem fx:id="item1" mnemonicParsing="false" onAction="#item1" text="Quản lí" />
+                  <MenuItem fx:id="item2" mnemonicParsing="false" onAction="#item2" text="Nhân viên" />
+              </items>
+            </ContextMenu>
+         </contextMenu></TextField>
       <TextField fx:id="phoneNumber" layoutX="289.0" layoutY="261.0" prefHeight="38.0" prefWidth="184.0" promptText="Phone Number " />
       <TextField fx:id="passCode" layoutX="289.0" layoutY="320.0" prefHeight="38.0" prefWidth="184.0" promptText="PassWord" />
-      <Button fx:id="quayLai_btn" layoutX="468.0" layoutY="396.0" mnemonicParsing="false" onAction="#quayLai_btn" >
+      <Button fx:id="quayLai_btn" layoutX="468.0" layoutY="396.0" mnemonicParsing="false" onAction="#quayLai_btn">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="59.0" layoutX="1051.0" layoutY="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -25,7 +33,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="add_btn" layoutX="605.0" layoutY="396.0" mnemonicParsing="false" onAction="#add_btn" >
+      <Button fx:id="add_btn" layoutX="605.0" layoutY="396.0" mnemonicParsing="false" onAction="#add_btn">
          <graphic>
             <ImageView fitHeight="37.0" fitWidth="59.0" layoutX="762.0" layoutY="668.0" pickOnBounds="true" preserveRatio="true">
                <image>

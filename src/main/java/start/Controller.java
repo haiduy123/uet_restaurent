@@ -1,5 +1,7 @@
 package start;
 
+import Alert.Alerts;
+import employees.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,32 +60,59 @@ public class Controller {
 
     @FXML
     void hoaDon_btn(ActionEvent event) throws IOException {
-        URL url = new File("src/main/resources/com/example/demo1/bill.fxml").toURI().toURL();
-        Parent root = FXMLLoader.load(url);
-        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
-        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        Stage window = (Stage) hoaDon_btn.getScene().getWindow();
-        window.setScene(new Scene(root));
+        for(employee employee : employeeManagement.allEmployee) {
+            if (employee.getEmployeeId() == login.Controller.id) {
+                if (employee.getJobTitle().equals("Quản lí")) {
+                    URL url = new File("src/main/resources/com/example/demo1/bill.fxml").toURI().toURL();
+                    Parent root = FXMLLoader.load(url);
+                    File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+                    root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+                    Stage window = (Stage) nhanVien_btn.getScene().getWindow();
+                    window.setScene(new Scene(root));
+                }
+                else {
+                    Alerts.showAlertWarning("Quản Lý Hóa Đơn", "Bạn không đủ thẩm quyền");
+                }
+            }
+        }
     }
 
     @FXML
     void nhanVien_btn(ActionEvent event) throws IOException {
-        URL url = new File("src/main/resources/com/example/demo1/employees.fxml").toURI().toURL();
-        Parent root = FXMLLoader.load(url);
-        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
-        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        Stage window = (Stage) nhanVien_btn.getScene().getWindow();
-        window.setScene(new Scene(root));
+        for(employee employee : employeeManagement.allEmployee) {
+            if (employee.getEmployeeId() == login.Controller.id) {
+                if (employee.getJobTitle().equals("Quản lí")) {
+                    URL url = new File("src/main/resources/com/example/demo1/employees.fxml").toURI().toURL();
+                    Parent root = FXMLLoader.load(url);
+                    File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+                    root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+                    Stage window = (Stage) nhanVien_btn.getScene().getWindow();
+                    window.setScene(new Scene(root));
+                }
+                else {
+                    Alerts.showAlertWarning("Quản Lý Nhân Viên", "Bạn không đủ thẩm quyền");
+                }
+            }
+        }
     }
 
     @FXML
     void thucDon_btn(ActionEvent event) throws IOException {
-        URL url = new File("src/main/resources/com/example/demo1/food.fxml").toURI().toURL();
-        Parent root = FXMLLoader.load(url);
-        File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
-        root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-        Stage window = (Stage) thucDon_btn.getScene().getWindow();
-        window.setScene(new Scene(root));
+        for(employee employee : employeeManagement.allEmployee) {
+            if (employee.getEmployeeId() == login.Controller.id) {
+                if (employee.getJobTitle().equals("Quản lí")) {
+                    URL url = new File("src/main/resources/com/example/demo1/food.fxml").toURI().toURL();
+                    Parent root = FXMLLoader.load(url);
+                    File f = new File("C:\\Users\\duyhai\\IdeaProjects\\demo1\\src\\main\\resources\\Style.css");
+                    root.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+                    Stage window = (Stage) nhanVien_btn.getScene().getWindow();
+                    window.setScene(new Scene(root));
+                }
+                else {
+                    Alerts.showAlertWarning("Quản Lý Thực Đơn", "Bạn không đủ thẩm quyền");
+                }
+            }
+        }
     }
 
     @FXML
